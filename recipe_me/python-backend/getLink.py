@@ -11,3 +11,5 @@ def run(list):
         if(driver.getPageSource().contains("hello")):
             list.remove[i]
 
+    return list
+

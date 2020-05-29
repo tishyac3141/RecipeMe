@@ -1,3 +1,5 @@
+import getLink
+
 def combo(lst, n): 
        
     if n == 0: 
@@ -32,7 +34,5 @@ def searching(list):
         for j in search(query, tld="co.in", num=10, stop=10, pause=2): 
             listofurls.append(str(j))
         idx+=1
-    return listofurls
+    getLink.run(listofurls)
         
-
-print(searching(["eggs","ham","peas"]))

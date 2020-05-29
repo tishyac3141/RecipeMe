@@ -1,5 +1,5 @@
 def combo(lst, n): 
-      
+       
     if n == 0: 
         return [[]] 
       

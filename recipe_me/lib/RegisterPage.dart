@@ -43,7 +43,7 @@ class _RegisterPageState extends State<RegisterPage> {
           title: Text("Register"),
         ),
         body: Container(
-            padding: const EdgeInsets.all(20.0),
+            padding: const EdgeInsets.all(25.0),
             child: SingleChildScrollView(
                 child: Form(
               key: _registerFormKey,
@@ -83,6 +83,10 @@ class _RegisterPageState extends State<RegisterPage> {
                     child: Text("Register"),
                     color: Theme.of(context).primaryColor,
                     textColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18.0),
+                      side: BorderSide(color: Colors.white)
+                    ),
                     onPressed: () {
                       if (_registerFormKey.currentState.validate()) {
                         if (pwdInputController.text ==

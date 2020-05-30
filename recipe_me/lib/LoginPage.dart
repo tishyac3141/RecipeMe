@@ -35,7 +35,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Login"),
+          title: Text("Login to get your recipes!"),
         ),
         body: Container(
             padding: const EdgeInsets.all(20.0),
@@ -63,7 +63,7 @@ class _LoginPageState extends State<LoginPage> {
                     textColor: Colors.white,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(18.0),
-                      side: BorderSide(color: Colors.black)
+                      side: BorderSide(color: Colors.white)
                     ),
                     onPressed: () {
                       if (_loginFormKey.currentState.validate()) {

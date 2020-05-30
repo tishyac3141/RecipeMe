@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
       ),
       home: LoginPage(),
       routes: <String, WidgetBuilder>{
-        '/home': (BuildContext context) => HomePage(title: 'Home'),
+        '/home': (BuildContext context) => Preferences(title: 'Select Your Restriction'),
         '/login': (BuildContext context) => LoginPage(),
         '/register': (BuildContext context) => RegisterPage(),
       }

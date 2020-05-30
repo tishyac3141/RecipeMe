@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 
+import 'HomePage.dart';
+import 'LoginPage.dart';
+import 'RegisterPage.dart';
+import 'SplashPage.dart';
+
 void main() {
   runApp(MyApp());
 }

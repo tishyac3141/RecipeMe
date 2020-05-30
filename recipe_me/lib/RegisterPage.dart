@@ -28,17 +28,6 @@ class _RegisterPageState extends State<RegisterPage> {
     super.initState();
   }
 
-  String emailValidator(String value) {
-    Pattern pattern =
-        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-    RegExp regex = new RegExp(pattern);
-    if (!regex.hasMatch(value)) {
-      return 'Email format is invalid';
-    } else {
-      return null;
-    }
-  }
-
   String pwdValidator(String value) {
     if (value.length < 8) {
       return 'Password must be longer than 8 characters';
@@ -65,23 +54,21 @@ class _RegisterPageState extends State<RegisterPage> {
                         labelText: 'First Name*', hintText: "John"),
                     controller: firstNameInputController,
                     validator: (value) {
-
+                      if (value.length < 3) {
+                        return "Please enter a valid first name.";
+                      }
+                    },
                   ),
                   TextFormField(
                       decoration: InputDecoration(
                           labelText: 'Last Name*', hintText: "Doe"),
                       controller: lastNameInputController,
-                      validator: (value) {
-                        if (value.length < 3) {
-                          return "Please enter a valid last name.";
-                        }
-                      }),
+                      ),
                   TextFormField(
                     decoration: InputDecoration(
                         labelText: 'Email*', hintText: "john.doe@gmail.com"),
                     controller: emailInputController,
                     keyboardType: TextInputType.emailAddress,
-                    validator: emailValidator,
                   ),
                   TextFormField(
                     decoration: InputDecoration(

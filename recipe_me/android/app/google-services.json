@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "624861205697",
+    "firebase_url": "https://recipeme-22.firebaseio.com",
+    "project_id": "recipeme-22",
+    "storage_bucket": "recipeme-22.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:624861205697:android:a13bcb6b1a0d02c9cd3040",
+        "android_client_info": {
+          "package_name": "recipe.me"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "624861205697-p97c73svfjd0t78o6onknucukqfsscrb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBcl8a7dRVt5-UKVf5FFVPKP0TzRg7yGAI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "624861205697-p97c73svfjd0t78o6onknucukqfsscrb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

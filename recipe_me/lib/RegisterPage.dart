@@ -91,7 +91,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       if (_registerFormKey.currentState.validate()) {
                         if (pwdInputController.text ==
                             confirmPwdInputController.text) {
-                          FirebaseAuth.instance
+                          FirebaseAuth.instance   
                               .createUserWithEmailAndPassword(
                                   email: emailInputController.text,
                                   password: pwdInputController.text);

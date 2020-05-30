@@ -90,16 +90,16 @@ class _RegisterPageState extends State<RegisterPage> {
                           FirebaseAuth.instance
                               .createUserWithEmailAndPassword(
                                   email: emailInputController.text,
-                                  password: pwdInputController.text)
-                              .then((currentUser) => Firestore.instance
-                                  .collection("users")
-                                  .document(currentUser.uid)
-                                  .setData({
-                                    "uid": currentUser.uid,
-                                    "fname": firstNameInputController.text,
-                                    "surname": lastNameInputController.text,
-                                    "email": emailInputController.text,
-                                  })); 
+                                  password: pwdInputController.text);
+                              //.then((currentUser) => Firestore.instance
+                                //  .collection("users")
+                                  //.document(currentUser.uid)
+                                  //.setData({
+                                    //"uid": currentUser.uid,
+                                    //"fname": firstNameInputController.text,
+                                    //"surname": lastNameInputController.text,
+                                    //"email": emailInputController.text,
+                                   
                         } else {
                           showDialog(
                               context: context,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:recipe_me/HomePage.dart';
+import 'package:recipe_me/LoginPage.dart';
 
 class RegisterPage extends StatefulWidget {
   RegisterPage({Key key}) : super(key: key);
@@ -91,15 +91,8 @@ class _RegisterPageState extends State<RegisterPage> {
                               .createUserWithEmailAndPassword(
                                   email: emailInputController.text,
                                   password: pwdInputController.text);
-                              //.then((currentUser) => Firestore.instance
-                                //  .collection("users")
-                                  //.document(currentUser.uid)
-                                  //.setData({
-                                    //"uid": currentUser.uid,
-                                    //"fname": firstNameInputController.text,
-                                    //"surname": lastNameInputController.text,
-                                    //"email": emailInputController.text,
-                                   
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));           
+                        
                         } else {
                           showDialog(
                               context: context,
@@ -118,9 +111,35 @@ class _RegisterPageState extends State<RegisterPage> {
                                 );
                               });
                         }
+                              //.then((currentUser) => Firestore.instance
+                                //  .collection("users")
+                                  //.document(currentUser.uid)
+                                  //.setData({
+                                    //"uid": currentUser.uid,
+                                    //"fname": firstNameInputController.text,
+                                    //"surname": lastNameInputController.text,
+                                    //"email": emailInputController.text,
+                        
+                        } else {
+                          showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: Text("Error"),
+                                  content: Text("You have not completely filled out the form. Please fill all the fields before registering."),
+                                  actions: <Widget>[
+                                    FlatButton(
+                                      child: Text("Close"),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                    )
+                                  ],
+                                );
+                              });
+                        }
                       }
-                    },
-                  ),
+                    ),
                   Text("Already have an account?"),
                   FlatButton(
                     child: Text("Login here!"),

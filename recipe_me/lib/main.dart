@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'HomePage.dart';
+import 'Preferences.dart';
 import 'LoginPage.dart';
 import 'RegisterPage.dart';
-import 'SplashPage.dart';
 
 void main() {
   runApp(MyApp());
@@ -19,7 +18,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.orange,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: SplashPage(),
+      home: LoginPage(),
       routes: <String, WidgetBuilder>{
         '/home': (BuildContext context) => HomePage(title: 'Home'),
         '/login': (BuildContext context) => LoginPage(),

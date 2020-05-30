@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:recipe_me/HomePage.dart';
+import 'package:recipe_me/RegisterPage.dart';
+import 'package:recipe_me/Preferences.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key key}) : super(key: key);
@@ -60,6 +61,10 @@ class _LoginPageState extends State<LoginPage> {
                     child: Text("Login"),
                     color: Theme.of(context).primaryColor,
                     textColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18.0),
+                      side: BorderSide(color: Colors.black)
+                    ),
                     onPressed: () {
                       if (_loginFormKey.currentState.validate()) {
                         FirebaseAuth.instance
@@ -67,13 +72,14 @@ class _LoginPageState extends State<LoginPage> {
                                 email: emailInputController.text,
                                 password: pwdInputController.text);
                       }
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => Preferences()));
                     },
                   ),
                   Text("Don't have an account yet?"),
                   FlatButton(
                     child: Text("Register here!"),
                     onPressed: () {
-                      Navigator.pushNamed(context, "/register");
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterPage()));
                     },
                   )
                 ],

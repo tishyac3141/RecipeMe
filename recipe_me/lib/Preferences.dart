@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-class HomePage extends StatefulWidget{
+class Preferences extends StatefulWidget{
  
-   HomePage({Key key, this.title, this.uid}) : super(key: key); 
+   Preferences({Key key, this.title, this.uid}) : super(key: key); 
   //update the constructor to include the uid
   final String title;
   final String uid;

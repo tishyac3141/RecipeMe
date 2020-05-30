@@ -53,11 +53,6 @@ class _RegisterPageState extends State<RegisterPage> {
                     decoration: InputDecoration(
                         labelText: 'First Name*', hintText: "John"),
                     controller: firstNameInputController,
-                    validator: (value) {
-                      if (value.length < 3) {
-                        return "Please enter a valid first name.";
-                      }
-                    },
                   ),
                   TextFormField(
                       decoration: InputDecoration(
@@ -104,27 +99,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                     "fname": firstNameInputController.text,
                                     "surname": lastNameInputController.text,
                                     "email": emailInputController.text,
-                                  })
-                                  .then((result) => {
-                                        Navigator.pushAndRemoveUntil(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) => HomePage(
-                                                      title:
-                                                          firstNameInputController
-                                                                  .text +
-                                                              "'s Tasks",
-                                                      uid: currentUser.uid,
-                                                    )),
-                                            (_) => false),
-                                        firstNameInputController.clear(),
-                                        lastNameInputController.clear(),
-                                        emailInputController.clear(),
-                                        pwdInputController.clear(),
-                                        confirmPwdInputController.clear()
-                                      })
-                                  .catchError((err) => print(err)))
-                              .catchError((err) => print(err));
+                                  })); 
                         } else {
                           showDialog(
                               context: context,

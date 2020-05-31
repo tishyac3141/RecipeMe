@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:recipe_me/Loading.dart';
-import 'package:recipe_me/Ingredient.dart';
+import 'package:recipe_me/pages/Loading.dart';
+import 'package:recipe_me/pages/Ingredient.dart';
 
 class Preference extends StatefulWidget{
  

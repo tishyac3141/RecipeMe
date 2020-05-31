@@ -1,4 +1,18 @@
-import getLink
+from bs4 import BeautifulSoup
+from selenium import webdriver
+from firebase_admin import credentials
+from firebase_admin import firestore
+import firebase_admin
+
+cred =  credentials.Certificate('fb.json')
+firebase_admin.initialize_app(cred)
+db = firestore.client();
+
+doc_ref = db.collection('userpreferences')
+docs = doc_ref.stream()
+
+
+
 
 def combo(lst, n): 
        
@@ -34,4 +48,15 @@ def searching(list):
         for j in search(query, tld="co.in", num=10, stop=10, pause=2): 
             listofurls.append(str(j))
         idx+=1
-    getLink.run(listofurls)
+    getLink(listofurls)
+
+def getLink(list):
+    driver = webdriver.Chrome()
+    for i in list:
+        URL = list[i]
+        driver.get(URL)
+        # need to get preferences from firebase to search within the text
+        if(driver.getPageSource().contains("hello")):
+            list.remove[i]
+
+    return list

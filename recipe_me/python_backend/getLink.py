@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup
 from selenium import webdriver
-
+from firebase_admin import credentials
+from firebase_admin import firebase
 
 def run(list):
     driver = webdriver.Chrome()

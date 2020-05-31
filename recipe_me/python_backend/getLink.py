@@ -1,7 +1,9 @@
 from bs4 import BeautifulSoup
 from selenium import webdriver
+from flask import Flask, request, jsonify
+app = Flask(__name__)
 
-
+@app.route('/getting', methods=['GET'])
 def run(list):
     driver = webdriver.Chrome()
     for i in list:

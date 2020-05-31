@@ -1,4 +1,6 @@
 import getLink
+from flask import Flask, request, jsonify
+app = Flask(__name__)
 
 def combo(lst, n): 
        
@@ -16,15 +18,24 @@ def combo(lst, n):
               
     return l 
 
-def searching(list):    
+@app.route('/api', methods=['GET'])
+def searching():
+
+    myItems = str(request.args['Query'])
+
+
     try: 
         from googlesearch import search 
     except ImportError:  
         print("No module named 'google' found") 
+
+    
+
+    lst = []
     
     searchlist=[]
-    for r in range(len(list)+1):
-        searchlist = searchlist + combo(list,r)
+    for r in range(len(lst)+1):
+        searchlist = searchlist + combo(lst,r)
     #print(searchlist)
     idx=1
     listofurls=[]

@@ -132,6 +132,7 @@ class _PreferenceState extends State<Preference>{
                             list[10].getTitle() : list[10].getIsChecked(),
                             list[11].getTitle() : list[11].getIsChecked(),
                             list[12].getTitle() : list[12].getIsChecked(),
+                            
                           });
     
     

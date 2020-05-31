@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:recipe_me/Loading.dart';
 import 'package:recipe_me/main.dart';
 
 class Preference extends StatefulWidget{
@@ -16,7 +17,9 @@ class Preference extends StatefulWidget{
 }
 
 class _PreferenceState extends State<Preference>{
+  
   final databaseReference = Firestore.instance;
+  
   List<Pref> list = [
     new Pref('Vegan', false),
     new Pref('Vegetarian', false),
@@ -37,7 +40,7 @@ class _PreferenceState extends State<Preference>{
 
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text("Dietary Restrictions: ")
+        title: new Text("Choose your Restrictions: ")
       ),
       body: Container(
         padding: const EdgeInsets.all(8.0),
@@ -99,11 +102,7 @@ class _PreferenceState extends State<Preference>{
         
             new RaisedButton(
                 onPressed: () {
-                  for (Pref p in widget.prefs) {
-                    if (p.isCheck){
-
-                    } 
-                  }
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => Loading()));
                 },
                 child: new Text('Next'),
               )
@@ -115,13 +114,15 @@ class _PreferenceState extends State<Preference>{
       
   }
 
-  void _createRecord(List<bool> list) async {
-    DocumentReference ref = await databaseReference.collection("userpreferences")
+  void _createRecord() async {
+    for(int i = 0; i < list.length; i++){
+      DocumentReference ref = await databaseReference.collection("userpreferences")
                           .add({
-                            'Vegan': true,
-                            'Vegetarian': false
+                            list[i].getTitle() : list[i].getIsChecked()
                           });
-    print(ref.documentID);
+    }
+    
+    
   }
   
 }
@@ -131,5 +132,8 @@ class Pref{
   bool isCheck;
   
   Pref(this.name, this.isCheck);
+
+  bool getIsChecked(){return isCheck;}
+  String getTitle(){return name; }
 
 }

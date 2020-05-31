@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'Preferences.dart';
+import 'Preference.dart';
 import 'LoginPage.dart';
 import 'RegisterPage.dart';
 
@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
       ),
       home: LoginPage(),
       routes: <String, WidgetBuilder>{
-        '/home': (BuildContext context) => Preferences(title: 'Select Your Restriction'),
+        '/home': (BuildContext context) => Preference(),
         '/login': (BuildContext context) => LoginPage(),
         '/register': (BuildContext context) => RegisterPage(),
       }

@@ -157,14 +157,16 @@ class _IngredientState extends State<Ingredient>{
                   
                   for (Product p in products) {
                     if (p.isCheck) {
-                      myList = myList + "," + (p.name.toString());
+                      myList = myList + "," + (p.name.toString().trim());
                     }
                   }
 
-                  String myUrl = "http://127.0.0.1:45867/api?Query=" + myList;
-                  List<String> lst = List<String>();
-                  lst = await getData(myUrl);
-                  print(lst);
+                  myList = myList.substring(1);
+
+                  String myUrl = "http://10.0.2.2:5000/api?Query=" + myList;
+                  //List<String> lst = List<String>();
+                  print(await getData(myUrl));
+                  //print(lst);
                   Navigator.push(context, MaterialPageRoute(builder: (context) => Loading()));
                 },
                 child: new Text('Next'),

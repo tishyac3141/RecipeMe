@@ -165,6 +165,7 @@ class _IngredientState extends State<Ingredient>{
 
                   String myUrl = "http://10.0.2.2:5000/api?Query=" + myList;
                   //List<String> lst = List<String>();
+                  //Loading.setUrl(myUrl);
                   print(await getData(myUrl));
                   //print(lst);
                   Navigator.push(context, MaterialPageRoute(builder: (context) => Loading()));

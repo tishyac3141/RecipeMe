@@ -8,14 +8,14 @@ from firebase_admin import credentials
 from firebase_admin import firestore
 import firebase_admin
 
-cred =  credentials.Certificate('fb3.json')
+cred =  credentials.Certificate('key.json')
 firebase_admin.initialize_app(cred)
-db = firestore.client();
+db = firestore.client()
 
 doc_ref = db.collection('userpreferences').where('name', '==', 'tishya').stream()
 
 for doc in doc_ref:
-    dict = ('{} => {}'.format(doc.id, doc.to_dict()));
+    dict = ('{} => {}'.format(doc.id, doc.to_dict()))
 
 print(dict)
 
@@ -76,7 +76,7 @@ def getLink(listOfURLS):
 
         for x in dict.values():
             if(dict[x] == 'true'):
-                print(x);
+                print(x)
                 print(dict[x])
         if(driver.getPageSource().contains("hello")):
             listOfURLS.remove[counter]
@@ -84,5 +84,5 @@ def getLink(listOfURLS):
         return {'Results': listOfURLS}
 
 
-searching(["potatos", "cheese", "eggs"])
+
 

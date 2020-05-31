@@ -4,15 +4,15 @@ from flask import Flask, request, jsonify
 app = Flask(__name__)
 
 @app.route('/getting', methods=['GET'])
-def run(list):
+def run(lst):
     driver = webdriver.Chrome()
-    for i in list:
-        URL = list[i]
+    for i in lst:
+        URL = lst[i]
         driver.get(URL)
         # need to get preferences from firebase to search within the text
         if(driver.getPageSource().contains("hello")):
-            list.remove[i]
+            lst.remove[i]
 
-    return list
+    return {'Results': lst}
 
 

@@ -29,9 +29,7 @@ def searching():
     except ImportError:  
         print("No module named 'google' found") 
 
-    
-
-    lst = []
+    lst = myItems.split(",")
     
     searchlist=[]
     for r in range(len(lst)+1):

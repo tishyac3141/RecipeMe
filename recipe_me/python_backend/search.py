@@ -52,21 +52,24 @@ def searching(list):
         idx+=1
     getLink(listofurls)
 
-def getLink(list):
+def getLink(listOfURLS):
     
     print("entered getLink()")
-    driver = webdriver.Chrome('‎⁨Macintosh HD/⁨Users⁩/tishya⁩/Documents⁩/Programming/⁩chromedriver')
-    for i in list:
+    driver = webdriver.Chrome(ChromeDriverManager().install())
+    counter = 0
+    
+    for i in listOfURLS:
         print("for loop")
-        URL = list[i]
+        URL = listOfURLS[counter]
+        counter += 1
         driver.get(URL)
 
-        for x in dict:
-            if(dict[x]):
+        for x in dict.values():
+            if(dict[x] == 'true'):
                 print(x);
                 print(dict[x])
         if(driver.getPageSource().contains("hello")):
-            list.remove[i]
+            listOfURLS.remove[counter]
 
     return list
 

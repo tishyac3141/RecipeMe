@@ -58,14 +58,15 @@ def searching():
     listofurls=[]
     while idx<len(searchlist):
         query = str(searchlist[idx]) + " recipe"
-        for i in val_list:
-            if(val_list[i]):
-                query += key_list[i]
         print(query)
         for j in search(query, tld="co.in", num=10, stop=10, pause=2): 
             listofurls.append(str(j))
         idx+=1
-    return jsonify((listofurls))
+
+    #return jsonify(getLink(listofurls))
+    return jsonify(listofurls)
+
+
 
 def getLink(listOfURLS):
     
@@ -79,11 +80,12 @@ def getLink(listOfURLS):
         counter += 1
         driver.get(URL)
 
+        count = 0
         for x in val_list:
-            if(val_list[i] == 'true'):
-                keyword = key_list[i] 
-                if(driver.getPageSource().contains("hello")):
-                    listOfURLS.remove[counter]
+            if(val_list[count] == 'true'):
+                keyword = key_list[count] 
+                if(driver.getPageSource().contains(keyword)):
+                    listOfURLS.remove[count]
 
         return {'Results': listOfURLS}
 

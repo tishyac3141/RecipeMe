@@ -23,17 +23,17 @@ class _PreferenceState extends State<Preference>{
   List<Pref> list = [
     new Pref('Vegan', false),
     new Pref('Vegetarian', false),
-    new Pref('Nuts Allergy', false),
-    new Pref('Gluten Allergy', false),
-    new Pref('Wheat Allergy', false),
-    new Pref('Shellfish Allergy', false),
-    new Pref('Soy Allergy', false),
-    new Pref('Peanut Allergy', false),
-    new Pref('Egg Allergy', false),
-    new Pref('Fruit Allergy', false),
-    new Pref('No Dairy', false),
-    new Pref('No Garlic', false),
-    new Pref('No Onions', false)
+    new Pref('Nuts', false),
+    new Pref('Gluten', false),
+    new Pref('Wheat', false),
+    new Pref('Shellfish', false),
+    new Pref('Soy', false),
+    new Pref('Peanut', false),
+    new Pref('Egg', false),
+    new Pref('Fruit', false),
+    new Pref('Dairy', false),
+    new Pref('Garlic', false),
+    new Pref('Onions', false)
   ];
 
   Widget build(BuildContext context) {

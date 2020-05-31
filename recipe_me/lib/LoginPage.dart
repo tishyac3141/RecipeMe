@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:recipe_me/RegisterPage.dart';
-import 'package:recipe_me/Preferences.dart';
+import 'package:recipe_me/Preference.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key key}) : super(key: key);
@@ -36,7 +36,7 @@ class _LoginPageState extends State<LoginPage> {
       try{
       AuthResult result = await FirebaseAuth.instance
                           .signInWithEmailAndPassword(email: emailInputController.text, password: pwdInputController.text);    
-      Navigator.push(context, MaterialPageRoute(builder: (context) => Preferences()));
+      Navigator.push(context, MaterialPageRoute(builder: (context) => Preference()));
       } 
       catch(error){
         switch(error.code){
@@ -68,7 +68,7 @@ class _LoginPageState extends State<LoginPage> {
           break;
           default:
           {
-             Navigator.push(context, MaterialPageRoute(builder: (context) => Preferences()));
+             Navigator.push(context, MaterialPageRoute(builder: (context) => Preference()));
           }
         }
       } 

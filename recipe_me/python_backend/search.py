@@ -13,7 +13,7 @@ doc_ref = db.collection('userpreferences').where('name', '==', 'tishya').stream(
 for doc in doc_ref:
     dict = ('{} => {}'.format(doc.id, doc.to_dict()));
 
-print(dict)       
+print(dict)
 
 def combo(lst, n): 
        
@@ -52,9 +52,11 @@ def searching(list):
     getLink(listofurls)
 
 def getLink(list):
-
-    driver = webdriver.Chrome()
+    
+    print("entered getLink()")
+    driver = webdriver.Chrome('‎⁨/⁨Users⁩/tishya⁩/Documents⁩/Programming/⁩chromedriver')
     for i in list:
+        print("for loop")
         URL = list[i]
         driver.get(URL)
 
@@ -66,3 +68,7 @@ def getLink(list):
             list.remove[i]
 
     return list
+
+
+searching(["potatos", "cheese", "eggs"])
+

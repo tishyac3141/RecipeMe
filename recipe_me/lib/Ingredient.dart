@@ -168,7 +168,7 @@ class _IngredientState extends State<Ingredient>{
                   //List<String> lst = List<String>();
                   //Loading.setUrl(myUrl);
                   //print(await getData(myUrl));
-                  var receivedUrls = jsonDecode(await getData(myUrl));
+                  List receivedUrls = jsonDecode(await getData(myUrl));
                   print(receivedUrls);
                   Navigator.push(context, MaterialPageRoute(builder: (context) => Loading()));
                 },

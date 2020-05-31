@@ -170,7 +170,7 @@ class _IngredientState extends State<Ingredient>{
                   //print(await getData(myUrl));
                   List receivedUrls = jsonDecode(await getData(myUrl));
                   print(receivedUrls);
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => Loading()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => Loading(receivedUrls)));
                 },
                 child: new Text('Next'),
                 

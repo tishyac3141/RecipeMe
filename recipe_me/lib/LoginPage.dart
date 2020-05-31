@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:recipe_me/RegisterPage.dart';
-import 'package:recipe_me/Preferences.dart';
+import 'package:recipe_me/Preference.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key key}) : super(key: key);
@@ -28,6 +28,50 @@ class _LoginPageState extends State<LoginPage> {
       return 'Password must be longer than 8 characters';
     } else {
       return null;
+    }
+  }
+
+  void validateLoginInput() async {
+    if (_loginFormKey.currentState.validate()) {
+      try{
+      AuthResult result = await FirebaseAuth.instance
+                          .signInWithEmailAndPassword(email: emailInputController.text, password: pwdInputController.text);    
+      Navigator.push(context, MaterialPageRoute(builder: (context) => Preference()));
+      } 
+      catch(error){
+        switch(error.code){
+          case "ERROR_USER_NOT_FOUND":
+          {
+             showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        content: Container(
+                          child: Text("There is no user with such entries. Please try again."),
+                        ),
+                      );
+                    });
+          }
+          break;
+          case "ERROR_WRONG_PASSWORD":
+          {
+               showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        content: Container(
+                          child: Text("Password does not match your email. Please try again."),
+                        ),
+                      );
+                    });
+          }
+          break;
+          default:
+          {
+             Navigator.push(context, MaterialPageRoute(builder: (context) => Preference()));
+          }
+        }
+      } 
     }
   }
 
@@ -65,14 +109,8 @@ class _LoginPageState extends State<LoginPage> {
                       borderRadius: BorderRadius.circular(18.0),
                       side: BorderSide(color: Colors.white)
                     ),
-                    onPressed: () {
-                      if (_loginFormKey.currentState.validate()) {
-                        FirebaseAuth.instance
-                            .signInWithEmailAndPassword(
-                                email: emailInputController.text,
-                                password: pwdInputController.text);
-                      }
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => Preferences()));
+                    onPressed: ()  {
+                      validateLoginInput();
                     },
                   ),
                   Text("Don't have an account yet?"),

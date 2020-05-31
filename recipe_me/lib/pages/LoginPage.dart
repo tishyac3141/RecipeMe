@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:recipe_me/pages/RegisterPage.dart';
 import 'package:recipe_me/pages/Preference.dart';
+import 'package:recipe_me/services/auth.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key key}) : super(key: key);
@@ -12,14 +13,19 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  
+  final AuthService _auth = AuthService();
+
   final GlobalKey<FormState> _loginFormKey = GlobalKey<FormState>();
   TextEditingController emailInputController;
   TextEditingController pwdInputController;
 
+  String email = '';
+  String password = '';
+  String error = '';
+
   @override
   initState() {
-    emailInputController = new TextEditingController();
-    pwdInputController = new TextEditingController();
     super.initState();
   }
 
@@ -28,50 +34,6 @@ class _LoginPageState extends State<LoginPage> {
       return 'Password must be longer than 8 characters';
     } else {
       return null;
-    }
-  }
-
-  void validateLoginInput() async {
-    if (_loginFormKey.currentState.validate()) {
-      try{
-      AuthResult result = await FirebaseAuth.instance
-                          .signInWithEmailAndPassword(email: emailInputController.text, password: pwdInputController.text);    
-      Navigator.push(context, MaterialPageRoute(builder: (context) => Preference()));
-      } 
-      catch(error){
-        switch(error.code){
-          case "ERROR_USER_NOT_FOUND":
-          {
-             showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        content: Container(
-                          child: Text("There is no user with such entries. Please try again."),
-                        ),
-                      );
-                    });
-          }
-          break;
-          case "ERROR_WRONG_PASSWORD":
-          {
-               showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        content: Container(
-                          child: Text("Password does not match your email. Please try again."),
-                        ),
-                      );
-                    });
-          }
-          break;
-          default:
-          {
-             Navigator.push(context, MaterialPageRoute(builder: (context) => Preference()));
-          }
-        }
-      } 
     }
   }
 
@@ -91,15 +53,20 @@ class _LoginPageState extends State<LoginPage> {
                   TextFormField(
                     decoration: InputDecoration(
                         labelText: 'Email*', hintText: "john.doe@gmail.com"),
-                    controller: emailInputController,
                     keyboardType: TextInputType.emailAddress,
+                    validator: (val) => val.isEmpty ? 'Enter an email' : null,
+                    onChanged: (val){
+                      setState(() => email = val);
+                    },
                   ),
                   TextFormField(
                     decoration: InputDecoration(
                         labelText: 'Password*', hintText: "********"),
-                    controller: pwdInputController,
                     obscureText: true,
                     validator: pwdValidator,
+                    onChanged: (val) {
+                      setState(() => password = val);
+                    },
                   ),
                   RaisedButton(
                     child: Text("Login"),
@@ -109,9 +76,21 @@ class _LoginPageState extends State<LoginPage> {
                       borderRadius: BorderRadius.circular(18.0),
                       side: BorderSide(color: Colors.white)
                     ),
-                    onPressed: ()  {
-                      validateLoginInput();
+                    onPressed: () async {
+                      if(_loginFormKey.currentState.validate()){
+                        dynamic result = await _auth.signInWithEmailAndPassword(email, password);
+                        if(result == null) {
+                          setState(() {
+                            error = 'Could not sign in with those credentials';
+                          });
+                        }
+                      }
                     },
+                  ),
+                  SizedBox(height: 12.0),
+                  Text(
+                    error,
+                    style: TextStyle(color: Colors.red, fontSize: 14.0),
                   ),
                   Text("Don't have an account yet?"),
                   FlatButton(

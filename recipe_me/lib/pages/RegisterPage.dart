@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:recipe_me/pages/LoginPage.dart';
+import 'package:recipe_me/services/auth.dart';
 
 class RegisterPage extends StatefulWidget {
   RegisterPage({Key key}) : super(key: key);
@@ -11,17 +12,22 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  
+  final AuthService _auth = AuthService();
   final GlobalKey<FormState> _registerFormKey = GlobalKey<FormState>();
-  TextEditingController firstNameInputController;
-  TextEditingController lastNameInputController;
+  
+  TextEditingController nameInputController;
   TextEditingController emailInputController;
   TextEditingController pwdInputController;
   TextEditingController confirmPwdInputController;
 
+  String email = '';
+  String password = '';
+  String error = '';
+
   @override
   initState() {
-    firstNameInputController = new TextEditingController();
-    lastNameInputController = new TextEditingController();
+    nameInputController = new TextEditingController();
     emailInputController = new TextEditingController();
     pwdInputController = new TextEditingController();
     confirmPwdInputController = new TextEditingController();
@@ -29,8 +35,8 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   String pwdValidator(String value) {
-    if (value.length < 8) {
-      return 'Password must be longer than 8 characters';
+    if (value.length < 6) {
+      return 'Password must be longer than 6 characters';
     } else {
       return null;
     }
@@ -50,20 +56,16 @@ class _RegisterPageState extends State<RegisterPage> {
               child: Column(
                 children: <Widget>[
                   TextFormField(
-                    decoration: InputDecoration(
-                        labelText: 'First Name*', hintText: "John"),
-                    controller: firstNameInputController,
-                  ),
-                  TextFormField(
                       decoration: InputDecoration(
-                          labelText: 'Last Name*', hintText: "Doe"),
-                      controller: lastNameInputController,
+                          labelText: 'Name*', hintText: "John Doe"),
+                      controller: nameInputController,
                       ),
                   TextFormField(
                     decoration: InputDecoration(
                         labelText: 'Email*', hintText: "john.doe@gmail.com"),
                     controller: emailInputController,
                     keyboardType: TextInputType.emailAddress,
+                    validator: (val) => val.isEmpty ? 'Enter an email' : null
                   ),
                   TextFormField(
                     decoration: InputDecoration(
@@ -87,16 +89,16 @@ class _RegisterPageState extends State<RegisterPage> {
                       borderRadius: BorderRadius.circular(18.0),
                       side: BorderSide(color: Colors.white)
                     ),
-                    onPressed: () {
+                    onPressed: () async {
                       if (_registerFormKey.currentState.validate()) {
                         if (pwdInputController.text ==
                             confirmPwdInputController.text) {
-                          FirebaseAuth.instance   
-                              .createUserWithEmailAndPassword(
-                                  email: emailInputController.text,
-                                  password: pwdInputController.text);
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));           
-                        
+                          dynamic result = await _auth.registerWithEmailAndPassword(email, password);
+                          if(result == null){
+                            setState(() => error = 'there is something wrong please try again');
+                          } else {
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));           
+                          }
                         } else {
                           showDialog(
                               context: context,
@@ -143,6 +145,11 @@ class _RegisterPageState extends State<RegisterPage> {
                               });
                         }
                       }
+                    ),
+                    SizedBox(height: 12.0),
+                    Text(
+                      error,
+                      style: TextStyle(color: Colors.red, fontSize: 14.0),
                     ),
                   Text("Already have an account?"),
                   FlatButton(

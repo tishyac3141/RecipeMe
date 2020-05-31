@@ -4,15 +4,6 @@ from firebase_admin import credentials
 from firebase_admin import firestore
 import firebase_admin
 
-cred =  credentials.Certificate('fb.json')
-firebase_admin.initialize_app(cred)
-db = firestore.client();
-
-doc_ref = db.collection('userpreferences')
-docs = doc_ref.stream()
-
-
-
 
 def combo(lst, n): 
        
@@ -51,12 +42,27 @@ def searching(list):
     getLink(listofurls)
 
 def getLink(list):
+
+    cred =  credentials.Certificate('fb.json')
+    firebase_admin.initialize_app(cred)
+    db = firestore.client();
+
+    doc_ref = db.collection('userpreferences').where('name', '==', 'tishya').stream()
+
+    for doc in doc_ref:
+        dict = '{} => {}'.format(doc.id, doc.to_dict())
+    
+    
     driver = webdriver.Chrome()
     for i in list:
         URL = list[i]
         driver.get(URL)
-        # need to get preferences from firebase to search within the text
-        if(driver.getPageSource().contains("hello")):
-            list.remove[i]
+
+        for x in dict:
+
+            if(dict[x]):
+                
+                if(driver.getPageSource().contains("hello")):
+                    list.remove[i]
 
     return list

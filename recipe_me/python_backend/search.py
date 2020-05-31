@@ -8,7 +8,7 @@ from firebase_admin import credentials
 from firebase_admin import firestore
 import firebase_admin
 
-cred =  credentials.Certificate('fb.json')
+cred =  credentials.Certificate('fb3.json')
 firebase_admin.initialize_app(cred)
 db = firestore.client();
 

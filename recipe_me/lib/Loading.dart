@@ -13,8 +13,7 @@ class Loading extends StatefulWidget{
 class _LoadingState extends State<Loading>{
   
   Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
+    return Scaffold(appBar: new AppBar(title: new Text('Loading Your Recipes')));
   }
   
 }

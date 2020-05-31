@@ -99,9 +99,10 @@ class _PreferenceState extends State<Preference>{
                                   setState(() {
                                       list[12].isCheck = value;
                                   });}),
-        
+            
             new RaisedButton(
                 onPressed: () {
+                  _createRecord();
                   Navigator.push(context, MaterialPageRoute(builder: (context) => Loading()));
                 },
                 child: new Text('Next'),
@@ -115,12 +116,24 @@ class _PreferenceState extends State<Preference>{
   }
 
   void _createRecord() async {
-    for(int i = 0; i < list.length; i++){
+    
       DocumentReference ref = await databaseReference.collection("userpreferences")
                           .add({
-                            list[i].getTitle() : list[i].getIsChecked()
+                            list[0].getTitle() : list[0].getIsChecked(),
+                            list[1].getTitle() : list[1].getIsChecked(),
+                            list[2].getTitle() : list[2].getIsChecked(),
+                            list[3].getTitle() : list[3].getIsChecked(),
+                            list[4].getTitle() : list[4].getIsChecked(),
+                            list[5].getTitle() : list[5].getIsChecked(),
+                            list[6].getTitle() : list[6].getIsChecked(),
+                            list[7].getTitle() : list[7].getIsChecked(),
+                            list[8].getTitle() : list[8].getIsChecked(),
+                            list[9].getTitle() : list[9].getIsChecked(),
+                            list[10].getTitle() : list[10].getIsChecked(),
+                            list[11].getTitle() : list[11].getIsChecked(),
+                            list[12].getTitle() : list[12].getIsChecked(),
                           });
-    }
+    
     
     
   }

@@ -1,107 +1,19 @@
+
 import 'package:flutter/material.dart';
 import 'Loading.dart';
-//import 'dart:async';
 
-//import 'search.py';
-class SearchList extends StatefulWidget {
-  SearchList({Key key, this.product}) : super(key: key);
-  List<Product> product = new List<Product>(); 
-  @override
-  _SearchState createState() {
-    return new _SearchState();
-  }
-}
-TextEditingController aController = new TextEditingController();
-class _SearchState extends State<SearchList> {
-  @override
-  Widget build(BuildContext context) {
-    return new Scaffold(
-        appBar: new AppBar(
-          title: new Text("Select Your Ingredients"),
-        ),
-        body: new Container(
-          padding: new EdgeInsets.all(8.0),
-          child: new Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: <Widget>[
-              new Expanded(
-                  child: new ListView(
-                padding: new EdgeInsets.symmetric(vertical: 8.0),
-                children: widget.product.map((Product product) {
-                  return new SearchItemList(product);
-                }).toList(),
-              )),
-
-               TextField(
+class Ingredient extends StatefulWidget{
   
-                controller: aController,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'other',
-                ),
-              ),
-
-              new RaisedButton(
-                onPressed: () {
-                  String myList = aController.text;
-                  
-                  for (Product p in widget.product) {
-                    if (p.isCheck) {
-                      myList= myList+","+(p.name.toString());
-                      
-                    }
-
-                  }
-                  
-                  print(myList);
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => Loading()));
-
-                  //searching(myList);
-                },
-                child: new Text('Next'),
-                
-              )
-            ],
-          ),
-        ));
+  State<StatefulWidget> createState() {
+    return new _IngredientState();
   }
-}
-class SearchItemList extends StatefulWidget {
-  final Product product;
-  SearchItemList(Product product)
-      : product = product,
-        super(key: new ObjectKey(product));
   
-  SearchState createState() {
-    return new SearchState(product);
-  }
 }
-class SearchState extends State<SearchItemList> {
-  final Product product;
-  SearchState(this.product);
+
+class _IngredientState extends State<Ingredient>{
   
-  Widget build(BuildContext context) {
-    return new ListTile(
-        title: new Row(
-      children: <Widget>[
-        new Expanded(child: new Text(product.name)),
-        new Checkbox(
-            value: product.isCheck,
-            onChanged: (bool value) {
-              setState(() {
-                product.isCheck = value;
-              });
-            })
-      ],
-    ));
-  }
-}
-void main() {
-  
-    runApp(new MaterialApp(
-      title: 'ListView CheckBox',
-      home: SearchList(product: [
-        new Product('asparagus', false),
+  List<Product> products = [
+    new Product('asparagus', false),
         new Product('apple', false),
         new Product('avocado', false),
         new Product('alfalfa', false),
@@ -200,13 +112,70 @@ void main() {
         new Product('wine', false),
         new Product('walnuts', false),
         new Product('yogurt', false),
-        new Product('zucchini', false),
-       
-    ]),
-  ));
+        new Product('zucchini', false)  
+  ];
+
+  TextEditingController aController;
+  
+  initState(){
+    aController = new TextEditingController();
+  }
+
+  Widget build(BuildContext context) {
+    return new Scaffold(
+        appBar: new AppBar(
+          title: new Text("Select Your Ingredients"),
+        ),
+        body: new Container(
+          padding: new EdgeInsets.all(8.0),
+           child: SingleChildScrollView(
+          child: new Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              for(int i = 0; i < products.length; i++) 
+                CheckboxListTile(
+                  title: new Text(products[i].getName()),
+                  value: products[i].getIsChecked(),
+                  onChanged: (bool value) {
+                  setState(() {
+                    products[i].isCheck = value;
+                  });
+                  }),
+              
+              TextField(
+              controller: aController,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'other',
+              ),
+            ),
+            new RaisedButton(
+                onPressed: () {
+                  String myList = aController.text;
+                  
+                  for (Product p in products) {
+                    if (p.isCheck) {
+                      myList = myList + "," + (p.name.toString());
+                    }
+                  }
+                  print(myList);
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => Loading()));
+                },
+                child: new Text('Next'),
+                
+              )
+            ],
+          ),
+        )));
+  }
+
 }
+
 class Product {
   String name;
   bool isCheck;
   Product(this.name, this.isCheck);
+
+  String getName(){return name;}
+  bool getIsChecked(){return isCheck;}
 }

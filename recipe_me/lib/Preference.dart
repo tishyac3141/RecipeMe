@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:recipe_me/Loading.dart';
-import 'package:recipe_me/main.dart';
+import 'package:recipe_me/Ingredient.dart';
 
 class Preference extends StatefulWidget{
  
@@ -103,7 +103,7 @@ class _PreferenceState extends State<Preference>{
             new RaisedButton(
                 onPressed: () {
                   _createRecord();
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => Loading()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => Ingredient()));
                 },
                 child: new Text('Next'),
               )

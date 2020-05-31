@@ -15,7 +15,10 @@ db = firestore.client();
 doc_ref = db.collection('userpreferences').where('name', '==', 'tishya').stream()
 
 for doc in doc_ref:
-    dict = ('{} => {}'.format(doc.id, doc.to_dict()));
+    dict = doc.to_dict()
+
+key_list = list(dict.keys())
+val_list = list(dict.values())
 
 print(dict)
 
@@ -40,7 +43,6 @@ def searching():
 
     myItems = str(request.args['Query'])
 
-
     try: 
         from googlesearch import search 
     except ImportError:  
@@ -55,12 +57,15 @@ def searching():
     idx=1
     listofurls=[]
     while idx<len(searchlist):
-        query = str(searchlist[idx])+" recipe"
+        query = str(searchlist[idx]) + " recipe"
+        for i in val_list:
+            if(val_list[i]):
+                query += key_list[i]
         print(query)
         for j in search(query, tld="co.in", num=10, stop=10, pause=2): 
             listofurls.append(str(j))
         idx+=1
-    return jsonify(getLink(listofurls))
+    return jsonify((listofurls))
 
 def getLink(listOfURLS):
     
@@ -74,15 +79,14 @@ def getLink(listOfURLS):
         counter += 1
         driver.get(URL)
 
-        for x in dict.values():
-            if(dict[x] == 'true'):
-                print(x);
-                print(dict[x])
-        if(driver.getPageSource().contains("hello")):
-            listOfURLS.remove[counter]
+        for x in val_list:
+            if(val_list[i] == 'true'):
+                keyword = key_list[i] 
+                if(driver.getPageSource().contains("hello")):
+                    listOfURLS.remove[counter]
 
         return {'Results': listOfURLS}
 
 
-searching(["potatos", "cheese", "eggs"])
+searching()
 

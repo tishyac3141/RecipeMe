@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
 from selenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
 from firebase_admin import credentials
 from firebase_admin import firestore
 import firebase_admin
@@ -54,7 +55,7 @@ def searching(list):
 def getLink(list):
     
     print("entered getLink()")
-    driver = webdriver.Chrome('‎⁨/⁨Users⁩/tishya⁩/Documents⁩/Programming/⁩chromedriver')
+    driver = webdriver.Chrome('‎⁨Macintosh HD/⁨Users⁩/tishya⁩/Documents⁩/Programming/⁩chromedriver')
     for i in list:
         print("for loop")
         URL = list[i]

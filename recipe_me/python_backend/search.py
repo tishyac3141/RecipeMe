@@ -1,6 +1,24 @@
 from flask import Flask, request, jsonify
 app = Flask(__name__)
 
+from bs4 import BeautifulSoup
+from selenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
+from firebase_admin import credentials
+from firebase_admin import firestore
+import firebase_admin
+
+cred =  credentials.Certificate('fb.json')
+firebase_admin.initialize_app(cred)
+db = firestore.client();
+
+doc_ref = db.collection('userpreferences').where('name', '==', 'tishya').stream()
+
+for doc in doc_ref:
+    dict = ('{} => {}'.format(doc.id, doc.to_dict()));
+
+print(dict)
+
 def combo(lst, n): 
        
     if n == 0: 
@@ -44,22 +62,27 @@ def searching():
         idx+=1
     return jsonify(getLink(listofurls))
 
+def getLink(listOfURLS):
+    
+    print("entered getLink()")
+    driver = webdriver.Chrome(ChromeDriverManager().install())
+    counter = 0
+    
+    for i in listOfURLS:
+        print("for loop")
+        URL = listOfURLS[counter]
+        counter += 1
+        driver.get(URL)
 
-from bs4 import BeautifulSoup
-#from selenium import webdriver
+        for x in dict.values():
+            if(dict[x] == 'true'):
+                print(x);
+                print(dict[x])
+        if(driver.getPageSource().contains("hello")):
+            listOfURLS.remove[counter]
 
-def getLink(lst):
-    #driver = webdriver.Chrome()
-    #for i in lst:
-     #   URL = lst[i]
-      #  driver.get(URL)
-        # need to get preferences from firebase to search within the text
-       # if(driver.getPageSource().contains("hello")):
-        #    lst.remove[i]
+        return {'Results': listOfURLS}
 
 
-
-    return {'Results': lst}
-
-
+searching(["potatos", "cheese", "eggs"])
 

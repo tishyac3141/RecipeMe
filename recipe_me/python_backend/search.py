@@ -1,4 +1,3 @@
-import getLink
 from flask import Flask, request, jsonify
 app = Flask(__name__)
 
@@ -43,4 +42,24 @@ def searching():
         for j in search(query, tld="co.in", num=10, stop=10, pause=2): 
             listofurls.append(str(j))
         idx+=1
-    getLink.run(listofurls)
+    return jsonify(getLink(listofurls))
+
+
+from bs4 import BeautifulSoup
+#from selenium import webdriver
+
+def getLink(lst):
+    #driver = webdriver.Chrome()
+    #for i in lst:
+     #   URL = lst[i]
+      #  driver.get(URL)
+        # need to get preferences from firebase to search within the text
+       # if(driver.getPageSource().contains("hello")):
+        #    lst.remove[i]
+
+
+
+    return {'Results': lst}
+
+
+

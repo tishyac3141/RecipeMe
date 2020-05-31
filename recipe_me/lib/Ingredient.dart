@@ -161,7 +161,7 @@ class _IngredientState extends State<Ingredient>{
                     }
                   }
 
-                  String myUrl = "http://127.0.0.1:5000/api?Query=" + myList;
+                  String myUrl = "http://127.0.0.1:45867/api?Query=" + myList;
                   List<String> lst = List<String>();
                   lst = await getData(myUrl);
                   print(lst);

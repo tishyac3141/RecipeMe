@@ -1,6 +1,8 @@
 
 import 'package:flutter/material.dart';
 import 'Loading.dart';
+import 'package:http/http.dart' as http;
+import'API.dart';
 
 class Ingredient extends StatefulWidget{
   
@@ -150,7 +152,7 @@ class _IngredientState extends State<Ingredient>{
               ),
             ),
             new RaisedButton(
-                onPressed: () {
+                onPressed: () async {
                   String myList = aController.text;
                   
                   for (Product p in products) {
@@ -158,7 +160,11 @@ class _IngredientState extends State<Ingredient>{
                       myList = myList + "," + (p.name.toString());
                     }
                   }
-                  print(myList);
+
+                  String myUrl = "http://127.0.0.1:5000/api?Query=" + myList;
+                  List<String> lst = List<String>();
+                  lst = await getData(myUrl);
+                  print(lst);
                   Navigator.push(context, MaterialPageRoute(builder: (context) => Loading()));
                 },
                 child: new Text('Next'),

@@ -38,7 +38,7 @@ def searching():
     idx=1
     listofurls=[]
     while idx<len(searchlist):
-        query= str(searchlist[idx])+" recipe"
+        query = str(searchlist[idx])+" recipe"
         print(query)
         for j in search(query, tld="co.in", num=10, stop=10, pause=2): 
             listofurls.append(str(j))

@@ -6,7 +6,7 @@ class LoadingSymbol extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container (
-      color: Colors.orange[100],
+      color: Colors.white,
       child: Center(
         child: SpinKitFoldingCube(
           color: Colors.orange,

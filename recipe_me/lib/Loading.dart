@@ -58,9 +58,9 @@ class _LoadingState extends State<Loading>{
                     throw 'Could not launch $link';
                   }
                 },
-              text: "Made by " + urls[i],
-              style: TextStyle(color: Colors.yellow),
-              linkStyle: TextStyle(color: Colors.red),
+              text: "Check out: " + urls[i],
+              style: TextStyle(color: Colors.black),
+              linkStyle: TextStyle(color: Colors.blue),
               
               )
           ]

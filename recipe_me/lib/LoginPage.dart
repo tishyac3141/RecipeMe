@@ -88,6 +88,7 @@ class _LoginPageState extends State<LoginPage> {
               key: _loginFormKey,
               child: Column(
                 children: <Widget>[
+                  Image.asset('assets/images/logo.png'),
                   TextFormField(
                     decoration: InputDecoration(
                         labelText: 'Email*', hintText: "john.doe@gmail.com"),

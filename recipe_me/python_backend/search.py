@@ -4,6 +4,16 @@ from firebase_admin import credentials
 from firebase_admin import firestore
 import firebase_admin
 
+cred =  credentials.Certificate('fb.json')
+firebase_admin.initialize_app(cred)
+db = firestore.client();
+
+doc_ref = db.collection('userpreferences').where('name', '==', 'tishya').stream()
+
+for doc in doc_ref:
+    dict = ('{} => {}'.format(doc.id, doc.to_dict()));
+
+print(dict)       
 
 def combo(lst, n): 
        
@@ -43,28 +53,16 @@ def searching(list):
 
 def getLink(list):
 
-    cred =  credentials.Certificate('fb.json')
-    firebase_admin.initialize_app(cred)
-    db = firestore.client();
-
-    doc_ref = db.collection('userpreferences').where('name', '==', 'tishya').stream()
-
-    for doc in doc_ref:
-        dict = '{} => {}'.format(doc.id, doc.to_dict())
-    
-    print(dict)
-    
     driver = webdriver.Chrome()
     for i in list:
         URL = list[i]
         driver.get(URL)
 
         for x in dict:
-
             if(dict[x]):
                 print(x);
                 print(dict[x])
-                if(driver.getPageSource().contains("hello")):
-                    list.remove[i]
+        if(driver.getPageSource().contains("hello")):
+            list.remove[i]
 
     return list

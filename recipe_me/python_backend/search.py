@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
 from selenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
 from firebase_admin import credentials
 from firebase_admin import firestore
 import firebase_admin
@@ -13,7 +14,7 @@ doc_ref = db.collection('userpreferences').where('name', '==', 'tishya').stream(
 for doc in doc_ref:
     dict = ('{} => {}'.format(doc.id, doc.to_dict()));
 
-print(dict)       
+print(dict)
 
 def combo(lst, n): 
        
@@ -51,18 +52,27 @@ def searching(list):
         idx+=1
     getLink(listofurls)
 
-def getLink(list):
-
-    driver = webdriver.Chrome()
-    for i in list:
-        URL = list[i]
+def getLink(listOfURLS):
+    
+    print("entered getLink()")
+    driver = webdriver.Chrome(ChromeDriverManager().install())
+    counter = 0
+    
+    for i in listOfURLS:
+        print("for loop")
+        URL = listOfURLS[counter]
+        counter += 1
         driver.get(URL)
 
-        for x in dict:
-            if(dict[x]):
+        for x in dict.values():
+            if(dict[x] == 'true'):
                 print(x);
                 print(dict[x])
         if(driver.getPageSource().contains("hello")):
-            list.remove[i]
+            listOfURLS.remove[counter]
 
     return list
+
+
+searching(["potatos", "cheese", "eggs"])
+

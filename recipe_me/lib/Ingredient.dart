@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'Loading.dart';
 import 'package:http/http.dart' as http;
 import'API.dart';
+import 'dart:convert';
 
 class Ingredient extends StatefulWidget{
   
@@ -167,6 +168,7 @@ class _IngredientState extends State<Ingredient>{
                   //List<String> lst = List<String>();
                   //Loading.setUrl(myUrl);
                   print(await getData(myUrl));
+                  //var receivedUrls = jsonDecode(await getData(myUrl));
                   //print(lst);
                   Navigator.push(context, MaterialPageRoute(builder: (context) => Loading()));
                 },

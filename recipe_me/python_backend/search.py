@@ -52,6 +52,7 @@ def getLink(list):
     for doc in doc_ref:
         dict = '{} => {}'.format(doc.id, doc.to_dict())
     
+    print(dict)
     
     driver = webdriver.Chrome()
     for i in list:
@@ -61,7 +62,8 @@ def getLink(list):
         for x in dict:
 
             if(dict[x]):
-                
+                print(x);
+                print(dict[x])
                 if(driver.getPageSource().contains("hello")):
                     list.remove[i]
 

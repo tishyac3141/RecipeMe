@@ -4,6 +4,7 @@ import 'Loading.dart';
 import 'package:http/http.dart' as http;
 import'API.dart';
 import 'dart:convert';
+import 'LoadingSymbol.dart';
 
 class Ingredient extends StatefulWidget{
   
@@ -15,6 +16,8 @@ class Ingredient extends StatefulWidget{
 
 class _IngredientState extends State<Ingredient>{
   
+  bool loading = false;
+
   List<Product> products = [
     new Product('asparagus', false),
         new Product('apple', false),
@@ -125,7 +128,7 @@ class _IngredientState extends State<Ingredient>{
   }
 
   Widget build(BuildContext context) {
-    return new Scaffold(
+    return loading ? LoadingSymbol() : Scaffold(
         appBar: new AppBar(
           title: new Text("Select Your Ingredients"),
         ),
@@ -154,6 +157,9 @@ class _IngredientState extends State<Ingredient>{
             ),
             new RaisedButton(
                 onPressed: () async {
+
+                  setState(() => loading = true);
+
                   String myList = aController.text;
                   
                   for (Product p in products) {
